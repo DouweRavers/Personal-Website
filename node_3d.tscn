@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cntc0lah5hmmd"]
-
-[ext_resource type="PackedScene" uid="uid://d0kyaj650wa11" path="res://assets/models/characters/polygon-douwe.glb" id="1_ds017"]
-
-[node name="Node3D" type="Node3D"]
-
-[node name="polygon-douwe" parent="." instance=ExtResource("1_ds017")]

@@ -1,0 +1,194 @@
+[gd_scene load_steps=14 format=3 uid="uid://c33sfdehgot1c"]
+
+[ext_resource type="Script" uid="uid://b2xqi24fh2ytf" path="res://scenes/characters/douwe_character.gd" id="1_grjhp"]
+[ext_resource type="PackedScene" uid="uid://d0kyaj650wa11" path="res://assets/models/characters/polygon-douwe.glb" id="2_71ve3"]
+[ext_resource type="AnimationLibrary" uid="uid://d2853stmp54v4" path="res://assets/animations/Unarmed Idle 01.fbx" id="3_vuqmj"]
+[ext_resource type="AnimationLibrary" uid="uid://bt2rfduaestig" path="res://assets/animations/Walking.fbx" id="4_8eacj"]
+
+[sub_resource type="Animation" id="Animation_dftsc"]
+resource_name = "Anim"
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton:Chest")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.49012e-08, 1.49012e-08, 1.49012e-08, -1)
+tracks/1/type = "scale_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftThumbProximal")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1.00005, 0.999956, 0.999996)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:LeftThumbDistal")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1.00012, 0.999918, 0.999959)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GeneralSkeleton:RightShoulder")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -0.5, 0.5, 0.5, 0.5)
+tracks/4/type = "scale_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GeneralSkeleton:RightThumbProximal")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 1.00005, 0.999956, 0.999995)
+tracks/5/type = "scale_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("%GeneralSkeleton:RightThumbDistal")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 1.00012, 0.999917, 0.999959)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GeneralSkeleton:RightFoot")
+tracks/6/interp = 0
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, -2.10734e-08, -0.707107, 0.707107, -4.21468e-08)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("%GeneralSkeleton:LeftFoot")
+tracks/7/interp = 0
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, -4.21468e-08, -0.707107, 0.707107, 0)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("%GeneralSkeleton:ik_foot_root")
+tracks/8/interp = 0
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0.707107, 0, 0, -0.707107)
+tracks/9/type = "rotation_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("%GeneralSkeleton:ik_hand_root")
+tracks/9/interp = 0
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, 0.707107, 0, 0, -0.707107)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("%GeneralSkeleton:ik_hand_l")
+tracks/10/interp = 0
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, -1, -7.93752e-22, -7.54979e-08, 1.48532e-08)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_enucn"]
+_data = {
+&"Anim": SubResource("Animation_dftsc")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a202f"]
+radius = 0.230784
+height = 1.83304
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2yge"]
+animation = &"Unarmed Idle 01/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1bvp3"]
+animation = &"Walking/mixamo_com"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lquwl"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mycd"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_272bh"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5vw27"]
+states/Start/position = Vector2(272, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_h2yge")
+states/idle/position = Vector2(404, 100)
+states/walk/node = SubResource("AnimationNodeAnimation_1bvp3")
+states/walk/position = Vector2(598, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lquwl"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_7mycd"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_272bh")]
+
+[node name="Douwe" type="CharacterBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_grjhp")
+
+[node name="polygon-douwe" parent="." instance=ExtResource("2_71ve3")]
+
+[node name="GeneralSkeleton" parent="polygon-douwe/Root_009" index="0"]
+bones/0/position = Vector3(0.0344604, 0.85846, -0.0140278)
+bones/0/rotation = Quaternion(-0.0296502, 0.0189641, -0.0246328, 0.999077)
+bones/1/rotation = Quaternion(-0.0216596, 0.00173111, 0.00603509, 0.999746)
+bones/2/rotation = Quaternion(0.0311214, 0.0104691, 0.0265918, 0.999107)
+bones/3/rotation = Quaternion(0.0304258, 0.0145004, 0.025212, 0.999114)
+bones/4/rotation = Quaternion(0.0145086, 0.0290022, -0.00334842, 0.999468)
+bones/5/rotation = Quaternion(0.01458, 0.0289892, -0.00335879, 0.999468)
+bones/8/rotation = Quaternion(0.503422, 0.496524, 0.494826, -0.505151)
+bones/9/rotation = Quaternion(0.151517, 0.773981, -0.596172, -0.150249)
+bones/10/rotation = Quaternion(0.11537, -0.673924, 0.127177, 0.718569)
+bones/11/rotation = Quaternion(-0.0057136, 0.484834, 0.0374911, 0.873783)
+bones/12/rotation = Quaternion(-0.280077, 0.786258, 0.135437, 0.533866)
+bones/13/rotation = Quaternion(0.266029, -0.0668859, 0.0343404, 0.961029)
+bones/14/rotation = Quaternion(0.0330572, -0.0614195, -0.0145179, 0.997459)
+bones/16/rotation = Quaternion(0.0763169, 0.0160807, -0.0237288, 0.996672)
+bones/17/rotation = Quaternion(0.166876, -0.0219443, -0.0181993, 0.985566)
+bones/18/rotation = Quaternion(0.128867, -0.0214374, -0.0397611, 0.990633)
+bones/23/rotation = Quaternion(0.49837, -0.502884, -0.51619, -0.481958)
+bones/24/rotation = Quaternion(0.0712848, 0.801891, -0.593182, 0.00482056)
+bones/25/rotation = Quaternion(0.123521, 0.734549, -0.115155, 0.657206)
+bones/26/rotation = Quaternion(-0.0465647, -0.650134, 0.0894532, 0.753098)
+bones/27/rotation = Quaternion(-0.273606, -0.800924, -0.149339, 0.511233)
+bones/28/rotation = Quaternion(0.280839, 0.0826054, 0.032009, 0.955657)
+bones/29/rotation = Quaternion(0.086675, 0.0362064, -0.0108087, 0.99552)
+bones/31/rotation = Quaternion(0.0267161, -0.00339898, 0.0917478, 0.995418)
+bones/32/rotation = Quaternion(0.234236, 0.0353326, 0.023236, 0.97126)
+bones/33/rotation = Quaternion(0.163015, 0.0206439, 0.0405316, 0.985574)
+bones/38/rotation = Quaternion(-0.0325009, 0.0534622, 0.998041, -0.00020024)
+bones/39/rotation = Quaternion(-0.0255214, 0.981603, -0.183439, -0.0464142)
+bones/40/rotation = Quaternion(-0.00568378, 0.633384, -0.773816, -0.00149123)
+bones/42/rotation = Quaternion(1.77873e-06, 0.999987, 0.00511631, 5.99275e-08)
+bones/43/rotation = Quaternion(0.121165, 0.159056, 0.977154, -0.07205)
+bones/44/rotation = Quaternion(-0.0263355, 0.970151, -0.226358, 0.082915)
+bones/45/rotation = Quaternion(-0.00949111, 0.681874, -0.730445, 0.0375241)
+bones/47/rotation = Quaternion(4.7942e-06, 0.999992, 0.00413206, 1.58052e-08)
+
+[node name="AnimationPlayer" parent="polygon-douwe" index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_enucn"),
+&"Unarmed Idle 01": ExtResource("3_vuqmj"),
+&"Walking": ExtResource("4_8eacj")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.923706, 0)
+shape = SubResource("CapsuleShape3D_a202f")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../polygon-douwe")
+tree_root = SubResource("AnimationNodeStateMachine_5vw27")
+anim_player = NodePath("../polygon-douwe/AnimationPlayer")
+parameters/conditions/idle = true
+parameters/conditions/walking = false
+
+[connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_finished"]
+[connection signal="waypoint_reached" from="NavigationAgent3D" to="." method="_on_navigation_waypoint_reached"]
+
+[editable path="polygon-douwe"]
