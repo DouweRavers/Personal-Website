@@ -6,6 +6,8 @@ extends Node3D
 
 func _ready() -> void:
 	douwe.go_to_position(Vector3.ZERO)
+	#var console = JavaScriptBridge.get_interface("console")
+	#console.log("hello world!")
 
 func _on_cilinder_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:

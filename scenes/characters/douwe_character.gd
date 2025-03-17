@@ -51,6 +51,6 @@ func _calc_velocity(delta:float) -> void:
 	velocity = move_direction * speed * projection
 	
 func _set_animation()->void:
-	var moving := walking_speed/5 < velocity.length()
-	animation.set("parameters/conditions/idle", not moving)
-	animation.set("parameters/conditions/walking", moving)
+	var is_moving := walking_speed/5 < velocity.length()
+	animation.set("parameters/conditions/idle", not is_moving)
+	animation.set("parameters/conditions/walking", is_moving)
